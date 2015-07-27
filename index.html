@@ -10,24 +10,36 @@
 		</style>
 	</head>
 	<body ng-cloak class="ng-cloak"><!--ng-clock用来避免启动闪烁 -->
+		<span>simpleHelloDirective测试
+			<simple-hello></simple-hello>
+		</span>
+		<br>
+		<span>Capitalizefilter测试： {{ "this is some text" | capitalize }}</span>
+		<br>
 		<input ng-model="name" class="form-control" type="text" placeholder="Your name">
 		<h1>Hello {{ name }}</h1>
-	<!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
+		<!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
 
 		<br>
-		Search: <input ng-model="query">
-		Sort by:
-		<select ng-model="orderProp">
-			<option value="name">Alphabetical</option>
-			<option value="age">Newest</option>
-		</select>
 
-		<ul ng-controller="PhoneListCtrl">
-			<li ng-repeat="phone in phones  | filter:query | orderBy:orderProp">
-				{{phone.name}}
-				<p>{{phone.snippet}}</p>
-			</li>
-		</ul>
+
+		<div ng-controller="PhoneListCtrl">
+			<!-- 这里的focus是自定义的directive 见app.js -->
+			Search: <input focus ng-model="query" placeholder="请输入过滤条件">
+			Sort by:
+			<select ng-model="orderProp">
+				<option value="name">Alphabetical</option>
+				<option value="age">Newest</option>
+			</select>
+			<ul>
+				<li ng-repeat="phone in phones  | filter:query | orderBy:orderProp">
+					{{phone.name}}
+					<p>{{phone.snippet}}</p>
+				</li>
+			</ul>
+
+			<button ng-click="showHello()">ng-click</button>
+		</div>
 
 		<script data-main="js/main" src="node_modules/requirejs/require.js"></script>
 	</body>

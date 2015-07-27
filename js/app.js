@@ -8,22 +8,34 @@ require([
 	require([
 		'controllers/todo',
 		'controllers/phone',
+		'directives/hello',
 		'directives/todoFocus', 
 		'directives/todoEscape',
-		'services/todoStorage'
-	], function (todoCtrl,phoneCtrl, todoFocusDir, todoEscapeDir, todoStorageSrv) {
+		'services/todoStorage',
+		'services/phoneStorage',
+		'filters/capitalize'
+	], function (todoCtrl,phoneCtrl,helloDir, todoFocusDir, todoEscapeDir, todoStorageSrv,phoneStorageSrv,capitalizeFilter) {
 		//angular
 		//	.module('todomvc', [todoFocusDir, todoEscapeDir, todoStorageSrv])
 		//	.controller('TodoController', todoCtrl);
-		//ÒòÎªrouteÊÇµ¥¶ÀµÄÒ»¸öÄ£¿é£¬ËùÒÔÔÚÔÛÃÇÊµÀı»¯appÄ£¿éµÄÊ±ºò£¬ĞèÒªÔÚÒÀÀµµÄÄ£¿éÁĞ±íÖĞ¼ÓÉÏrouteµÄmoduleÃû¡°ngRoute¡±
+		//å› ä¸ºrouteæ˜¯å•ç‹¬çš„ä¸€ä¸ªæ¨¡å—ï¼Œæ‰€ä»¥åœ¨å’±ä»¬å®ä¾‹åŒ–appæ¨¡å—çš„æ—¶å€™ï¼Œéœ€è¦åœ¨ä¾èµ–çš„æ¨¡å—åˆ—è¡¨ä¸­åŠ ä¸Šrouteçš„moduleåâ€œngRouteâ€
 		var app=angular
-			.module('myApp', ['ngRoute'])
+			.module('myApp', ['ngRoute',helloDir,capitalizeFilter,phoneStorageSrv])
 			.controller('PhoneListCtrl', phoneCtrl);
-		//ÊÇ·ñÓĞÓÃ»¹²»ÖªµÀ
+		//è‡ªå®šä¹‰ä¸€ä¸ªåä¸ºfocusçš„directiveï¼Œå¯ä»¥ç”¨æ¥å°†inputè®¾ä¸ºfocus
+		app.directive('focus',function(){
+			return {
+				link:function(scope,element,attrs){
+					element[0].focus();
+				}
+			}
+		});
+
+		//æ˜¯å¦æœ‰ç”¨è¿˜ä¸çŸ¥é“
 		app.config(['$routeProvider','$locationProvider',
 			function($routeProvider,$locationProvider){
-				//Õë¶ÔHtml5µÄhistoryÄ£Ê½£¬ÉèÖÃhtml5Mode(true)¼´¿É
-				//Èç¹ûµ±ÊÇÒÔhash·½Ê½¸üĞÂlocationµÄ»°£¬ĞèÒªÉèÖÃÏÂhashPrefix£¬Ä¬ÈÏÎª¿Õ
+				//é’ˆå¯¹Html5çš„historyæ¨¡å¼ï¼Œè®¾ç½®html5Mode(true)å³å¯
+				//å¦‚æœå½“æ˜¯ä»¥hashæ–¹å¼æ›´æ–°locationçš„è¯ï¼Œéœ€è¦è®¾ç½®ä¸‹hashPrefixï¼Œé»˜è®¤ä¸ºç©º
 				$locationProvider.html5Mode(true).hashPrefix('!');
 			}
 		]);

@@ -10,16 +10,13 @@
 define([
     'angular'
 ], function (angular) {
-    return ['$scope',
-        function ($scope) {
-            $scope.phones = [
-                {"name": "Nexus S",
-                    "snippet": "Fast just got faster with Nexus S."},
-                {"name": "Motorola XOOM? with Wi-Fi",
-                    "snippet": "The Next, Next Generation tablet."},
-                {"name": "MOTOROLA XOOM?",
-                    "snippet": "The Next, Next Generation tablet."}
-            ];
+    return ['$scope','phoneStorage',
+        function ($scope,phoneStorage) {
+            $scope.phones = phoneStorage;
+            $scope.showHello=function(){
+                alert('Hello！这是ng-click测试。');
+            };
+            $scope.orderProp="age";
         }
     ];
 });
