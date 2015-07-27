@@ -10,13 +10,33 @@
 define([
     'angular'
 ], function (angular) {
-    return ['$scope','phoneStorage',
-        function ($scope,phoneStorage) {
+    return ['$scope','$http','phoneStorage',
+        function ($scope,$http,phoneStorage) {
             $scope.phones = phoneStorage;
             $scope.showHello=function(){
                 alert('Hello！这是ng-click测试。');
             };
             $scope.orderProp="age";
+
+            $scope.clock=new Date();
+            var updateClock=function(){
+                $scope.clock=new Date();
+            };
+            var timer=setInterval(function(){
+                $scope.$apply(updateClock);
+            },1000);
+
+            $http({
+                method: 'JSONP',
+                url: 'https://api.github.com/events?callback=JSON_CALLBACK'
+            }).success(function(data, status, headers, config) {
+                //console.log(data);
+                // data contains the response
+                // status is the HTTP status
+                // headers is the header getter function
+                // config is the object that was used to create the HTTP request
+            }).error(function(data, status, headers, config) {
+            });
         }
     ];
 });

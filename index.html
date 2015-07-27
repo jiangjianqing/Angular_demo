@@ -21,9 +21,19 @@
 		<!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
 
 		<br>
+	<!-- 使用currency过滤器-->
 
+		<button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow">Flip the shouldShow variable</button>
+		<div ng-show="shouldShow">
+			<h3>Showing {{ shouldShow }}</h3>
+		</div>
+		<div ng-hide="shouldShow">
+			<h3>Hiding {{ shouldShow }}</h3>
+		</div>
+		{{ 10 * 3.3 | currency }}
 
 		<div ng-controller="PhoneListCtrl">
+			<p>当前时间：{{clock}}</p>
 			<!-- 这里的focus是自定义的directive 见app.js -->
 			Search: <input focus ng-model="query" placeholder="请输入过滤条件">
 			Sort by:
@@ -37,8 +47,24 @@
 					<p>{{phone.snippet}}</p>
 				</li>
 			</ul>
-
 			<button ng-click="showHello()">ng-click</button>
+		</div>
+
+		<div ng-controller="PlayerController">
+			<button ng-click="play()" class="button" ng-show="!playing">Play</button>
+			<button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
+			Playing audio: <b>{{ playing }}</b>
+
+			<ul id="programs_list" class="">
+				<!-- 这里是简单示例，下面用模板代替
+				<li ng-repeat="program in programs" ng-click="play(program)">
+					<span class="large-12">{{ program.title.$text }}</span>
+				</li>
+				-->
+				<li ng-repeat="program in programs">
+					<span npr-link play='play(program)' ng-model="program"></span>
+				</li>
+			</ul>
 		</div>
 
 		<script data-main="js/main" src="node_modules/requirejs/require.js"></script>
