@@ -7,6 +7,22 @@
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<style type="text/css">
 			.ng-cloak {display:none;}
+			/* ng-invalid和ng-valid都是angular在表单验证是自动添加的css	*/
+			input.ng-invalid {/*表单非法时设置*/
+				border: 1px solid red;
+			}
+
+			input.ng-valid {/*表单合法时设置*/
+				border: 1px solid green;
+			}
+
+			input.ng-pristion{/*表单未进行修改时设置*/
+
+			}
+
+			input.ng-dirty{/*表单进行过修改时设置*/
+
+			}
 		</style>
 	</head>
 	<body ng-cloak class="ng-cloak"><!--ng-clock用来避免启动闪烁 -->
@@ -16,14 +32,33 @@
 		<br>
 		<span>Capitalizefilter测试： {{ "this is some text" | capitalize }}</span>
 		<br>
-		<input ng-model="name" class="form-control" type="text" placeholder="Your name">
-		<h1>Hello {{ name }}</h1>
-		<!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
+
+		<form name="signup_form" novalidate ng-submit="">
+			<fieldset>
+				<legend>表单测试</legend>
+			</fieldset>
+			<!-- 表单验证必须有name属性  -->
+			<input name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="Please input email address" required>
+			<div ng-show="signup_form.emailAddr.$dirty && signup_form.emailAddr.$invalid">
+				<small class="error" ng-show="signup_form.emailAddr.$error.email">
+					邮件地址无效！
+				</small>
+				<small class="error" ng-show="signup_form.emailAddr.$error.required">
+					邮件地址必须要输入！
+				</small>
+			</div>
+			<div ng-show="signup_form.emailAddr.$valid">
+				<p>邮件地址有效：{{emailAddress}}</p>
+			</div>
+			<button type="submit" ng-disabled="signup_form.$invalid">提交</button>
+			<!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
+		</form>
+
 
 		<br>
 	<!-- 使用currency过滤器-->
 
-		<button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow">Flip the shouldShow variable</button>
+		<button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow" >Flip the shouldShow variable</button>
 		<div ng-show="shouldShow">
 			<h3>Showing {{ shouldShow }}</h3>
 		</div>
@@ -33,7 +68,8 @@
 		{{ 10 * 3.3 | currency }}
 
 		<div ng-controller="PhoneListCtrl">
-			<p>当前时间：{{clock}}</p>
+			<!-- 最佳实践：在视图中绑定对象属性 而非对象本身 -->
+			<p>当前时间：{{clock.now|date:'yyyy-MM-dd HH:mm:ss'}}</p><!-- 过滤器使用范例 -->
 			<!-- 这里的focus是自定义的directive 见app.js -->
 			Search: <input focus ng-model="query" placeholder="请输入过滤条件">
 			Sort by:
@@ -42,7 +78,7 @@
 				<option value="age">Newest</option>
 			</select>
 			<ul>
-				<li ng-repeat="phone in phones  | filter:query | orderBy:orderProp">
+				<li ng-repeat="phone in phones  | filter:query | orderBy:orderProp:true"><!-- orderBy的第二个参数可以用来改变顺序-->
 					{{phone.name}}
 					<p>{{phone.snippet}}</p>
 				</li>
