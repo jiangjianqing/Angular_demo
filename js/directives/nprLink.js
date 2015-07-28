@@ -17,7 +17,7 @@ define([
                     play: '&'    // 将引用传递给这个方法
                     //,fromName: '@' // 储存与fromName相关联的字符串
                 },
-                templateUrl: 'js/views/nprListItem.html',
+                templateUrl: 'views/nprListItem.html',
 
                 /*
                 *如果没有设置require选项，那么controller参数的值为undefined。
