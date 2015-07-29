@@ -2,9 +2,9 @@
 'use strict';
 
 require([
-	'angular',
-	'angularRoute',
-	'angularMessages'
+	'angular'
+	,'angularRoute'
+	,'angularMessages'
 ], function (angular) {
 	require([
 		'controllers/todo',

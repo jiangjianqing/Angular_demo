@@ -5,28 +5,7 @@
     <title>表单测试--Angular</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <style type="text/css">
-        /* 防止闪烁*/
-        .ng-cloak {display:none;}
-
-
-        /* ng-invalid和ng-valid都是angular在表单验证是自动添加的css	*/
-        input.ng-invalid {/*表单非法时设置*/
-            border: 1px solid red;
-        }
-
-        input.ng-valid {/*表单合法时设置*/
-            border: 1px solid green;
-        }
-
-        input.ng-pristine{/*表单未进行修改时设置*/
-
-        }
-
-        input.ng-dirty{/*表单进行过修改时设置*/
-
-        }
-    </style>
+    <link rel="stylesheet" href="css/myAngularCss.css">
 </head>
 <body ng-cloak class="ng-cloak"><!--ng-clock用来避免启动闪烁 -->
     <h4>**注意：所有的表单元素都必须有name属性**</h4>
@@ -68,9 +47,10 @@
                     邮件地址必须要输入！
                 </small>
             </div>
-            <div ng-message="signup_form.emailAddr.$valid">
-                <p>邮件地址有效：{{emailAddress}}</p>
-            </div>
+            <!-- ng-message 必须在ng-messages的范围内使用，否则会报错 -->
+            <!--<div ng-message="signup_form.emailAddr.$valid">-->
+                <!--<p>邮件地址有效：{{emailAddress}}</p>-->
+            <!--</div>-->
 
         </fieldset>
         <button type="submit" ng-disabled="signup_form.$invalid">提交</button>
