@@ -26,9 +26,15 @@
         </div>
     </div>
 
-
     <div ng-controller="PhoneListController">
-        <button ng-click="showHello()">ng-click测试</button>
+        <!-- 注意：使用ctrl.$setValidity时会在formname.inputname.$error下增加一个key，所以$setValidity只能用于表单范围内 -->
+        <form name="signup_form" novalidate ng-submit="">
+            <label for="userName">用户名必须唯一测试(输入my为正确，其他输入项为错误)</label>
+            <input id="userName" name="userName" ng-model="userName" ensure-unique="user">
+            <div ng-show="signup_form.userName.$dirty && signup_form.userName.$invalid">
+                <pre class="error" ng-show="signup_form.userName.$error.unique">用户名必须唯一！</pre>
+            </div>
+        </form>
     </div>
 
     <div ng-controller="PlayerController">

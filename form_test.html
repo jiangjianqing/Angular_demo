@@ -19,7 +19,7 @@
             border: 1px solid green;
         }
 
-        input.ng-pristion{/*表单未进行修改时设置*/
+        input.ng-pristine{/*表单未进行修改时设置*/
 
         }
 
@@ -34,20 +34,45 @@
     <form name="signup_form" novalidate ng-submit="">
         <fieldset>
             <legend>表单测试</legend>
+
+            <!-- 表单验证必须有name属性  -->
+            <input name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="Please input email address" required>
+            <div ng-show="signup_form.emailAddr.$dirty && signup_form.emailAddr.$invalid">
+                <small class="error" ng-show="signup_form.emailAddr.$error.email">
+                    邮件地址无效！
+                </small>
+                <small class="error" ng-show="signup_form.emailAddr.$error.required">
+                    邮件地址必须要输入！
+                </small>
+            </div>
+            <div ng-show="signup_form.emailAddr.$valid">
+                <p>邮件地址有效：{{emailAddress}}</p>
+            </div>
+
         </fieldset>
-        <!-- 表单验证必须有name属性  -->
-        <input name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="Please input email address" required>
-        <div ng-show="signup_form.emailAddr.$dirty && signup_form.emailAddr.$invalid">
-            <small class="error" ng-show="signup_form.emailAddr.$error.email">
-                邮件地址无效！
-            </small>
-            <small class="error" ng-show="signup_form.emailAddr.$error.required">
-                邮件地址必须要输入！
-            </small>
-        </div>
-        <div ng-show="signup_form.emailAddr.$valid">
-            <p>邮件地址有效：{{emailAddress}}</p>
-        </div>
+        <button type="submit" ng-disabled="signup_form.$invalid">提交</button>
+        <!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
+    </form>
+
+    <form name="ngMessagesTestForm" novalidate ng-submit="">
+        <fieldset>
+            <legend>ngMessages表单测试</legend>
+
+            <!-- 表单验证必须有name属性  -->
+            <input name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="请输入邮件地址" required>
+            <div ng-messages="ngMessagesTestForm.emailAddr.$error">
+                <small class="error" ng-message="email">
+                    邮件地址无效！
+                </small>
+                <small class="error" ng-message="required">
+                    邮件地址必须要输入！
+                </small>
+            </div>
+            <div ng-message="signup_form.emailAddr.$valid">
+                <p>邮件地址有效：{{emailAddress}}</p>
+            </div>
+
+        </fieldset>
         <button type="submit" ng-disabled="signup_form.$invalid">提交</button>
         <!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
     </form>

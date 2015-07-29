@@ -3,7 +3,8 @@
 
 require([
 	'angular',
-	'angularRoute'
+	'angularRoute',
+	'angularMessages'
 ], function (angular) {
 	require([
 		'controllers/todo',
@@ -14,17 +15,18 @@ require([
 		'directives/nprLink',
 		'directives/todoFocus', 
 		'directives/todoEscape',
+		'directives/ensureUnique',
 		'services/todoStorage',
 		'services/phoneStorage',
 		'services/myInterpolate',
 		'filters/capitalize'
-	], function (todoCtrl,phoneCtrl,audioCtrl,exprCtrl,helloDir,nprLinkDir, todoFocusDir, todoEscapeDir, todoStorageSrv,phoneStorageSrv,myInterpolateSrv,capitalizeFilter) {
+	], function (todoCtrl,phoneCtrl,audioCtrl,exprCtrl,helloDir,nprLinkDir, todoFocusDir, todoEscapeDir,ensureUniqueDir, todoStorageSrv,phoneStorageSrv,myInterpolateSrv,capitalizeFilter) {
 		//angular
 		//	.module('todomvc', [todoFocusDir, todoEscapeDir, todoStorageSrv])
 		//	.controller('TodoController', todoCtrl);
 		//因为route是单独的一个模块，所以在咱们实例化app模块的时候，需要在依赖的模块列表中加上route的module名“ngRoute”
 		var app=angular
-			.module('myApp', ['ngRoute',helloDir,nprLinkDir,capitalizeFilter,phoneStorageSrv,myInterpolateSrv])
+			.module('myApp', ['ngRoute','ngMessages',helloDir,nprLinkDir,ensureUniqueDir,capitalizeFilter,phoneStorageSrv,myInterpolateSrv])
 			.controller('PhoneListController', phoneCtrl)//控制器名称定义：####Controller
 			.controller('ExprController',exprCtrl)
 			.controller('PlayerController',audioCtrl);
