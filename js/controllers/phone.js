@@ -23,6 +23,24 @@ define([
                 now:new Date()
             };
 
+            //监视一个值
+            var unWatchFn=$scope.$watch('full_name',
+                function(newVal, oldVal, scope) {
+                    if(newVal === oldVal) {
+                        // 只会在监控器初始化阶段运行
+                    } else {
+                        // 初始化之后发生的变化
+                    }
+                });
+            unWatchFn();//用于注销上面那个$watch
+
+            //监视一个集合
+            var unWatchCollectionFn=$scope.$watchCollection("phones",
+                function(newPhones,oldPhones,scope){
+                    //Phones集合中的数据已经发生了变化
+            });
+            unWatchCollectionFn();
+
             //$timeout与setTimeout作用相同，还可以不考虑闭包等问题
             //$timeout(function(){
             //    updateClock();

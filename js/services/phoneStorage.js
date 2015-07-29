@@ -7,7 +7,7 @@ define([
     var moduleName="PhoneStorageService";
     angular
         .module(moduleName,[])
-        .factory('phoneStorage',function(){
+        .factory('phoneStorage',['$log',function($log){
             var phones=[
                 {   "name": "Nexus S",
                     "snippet": "Fast just got faster with Nexus S.",
@@ -22,7 +22,8 @@ define([
                     "age":3
                 }
             ];
+            $log.info("phoneService 单例构造完成");
             return phones;
-        });
+        }]);
     return moduleName;
 });

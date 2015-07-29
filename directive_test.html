@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs">
+<head>
+    <meta charset="utf-8">
+    <title>指令测试--Angular</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <style type="text/css">
+        /* 防止闪烁*/
+        .ng-cloak {display:none;}
+
+    </style>
+</head>
+<body ng-cloak class="ng-cloak"><!--ng-clock用来避免启动闪烁 -->
+    <span>自定义指令simpleHelloDirective测试
+        <simple-hello></simple-hello>
+    </span>
+    <div>
+        <p>ng-show\ng-hide测试</p>
+        <button ng-init="shouldShow = true" ng-click="shouldShow = !shouldShow" >点击切换</button>
+        <div ng-show="shouldShow">
+            <h3>Showing {{ shouldShow }}</h3>
+        </div>
+        <div ng-hide="shouldShow">
+            <h3>Hiding {{ shouldShow }}</h3>
+        </div>
+    </div>
+
+
+    <div ng-controller="PhoneListController">
+        <button ng-click="showHello()">ng-click测试</button>
+    </div>
+
+    <div ng-controller="PlayerController">
+        <p>自定义播放器</p>
+        <button ng-click="play()" class="button" ng-show="!playing">Play</button>
+        <button ng-click="stop()" class="button alert" ng-show="playing">Stop</button>
+        Playing audio: <b>{{ playing }}</b>
+
+        <ul id="programs_list" class="">
+            <!-- 这里是简单示例，下面用模板代替
+            <li ng-repeat="program in programs" ng-click="play(program)">
+                <span class="large-12">{{ program.title.$text }}</span>
+            </li>
+            -->
+            <li ng-repeat="program in programs">
+                <span npr-link play='play(program)' ng-model="program"></span>
+            </li>
+        </ul>
+    </div>
+
+    <script data-main="js/main" src="node_modules/requirejs/require.js"></script>
+</body>
+</html>

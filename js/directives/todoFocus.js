@@ -13,8 +13,8 @@ define([
 		.module(moduleName, [])
 		.directive('todoFocus', ['$timeout', function ($timeout) {
 			return function (scope, elem, attrs) {
-				scope.$watch(attrs.todoFocus, function (newval) {
-					if (newval) {
+				scope.$watch(attrs.todoFocus, function (newVal,oldVal,scope) {
+					if (newVal) {
 						$timeout(function () {
 							elem[0].focus();
 						}, 0, false);

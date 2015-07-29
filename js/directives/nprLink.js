@@ -24,7 +24,7 @@ define([
                 *定义了require，才会有第四个controller参数，代表控制器或所依赖指令的控制器
                 * 如果require选项提供了一个指令数组，第四个参数会是一个由每个指令所对应的控制器组成的数组。
                 * */
-                link: function(scope, iElement,iAttrs,controller) {
+                link: function(scope, ele,attrs,ctrl) {
                     scope.duration = scope.ngModel.audio[0].duration.$text;
                 }
             };
