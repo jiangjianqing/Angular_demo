@@ -1,5 +1,7 @@
 /* 防止闪烁*/
-.ng-cloak {display:none;}
+[ng-cloak] {
+    display: none;
+}
 
 
 /* ng-invalid和ng-valid都是angular在表单验证是自动添加的css	*/

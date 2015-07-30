@@ -22,7 +22,7 @@ define([
                         "attrs":attrs,
                         "ctrl":ctrl
                     });
-                    scope.$watch(attrs.ngModel,function(newVal,oldVal/*, scope 忽略*/){
+                    var unRegisterWatchFn=scope.$watch(attrs.ngModel,function(newVal,oldVal/*, scope 忽略*/){
                         if(!newVal) return;
                         ctrl.$setValidity("unique",newVal==="my");
                         /*向/api/check/username的地址发送一个POST请求来验证用户名是否可用
@@ -39,6 +39,9 @@ define([
                             ctrl.$setValidity('unique', false);
                         });
                         */
+                    });
+                    scope.$on("$destroy",function(){
+                        unRegisterWatchFn();
                     });
                 }
             }

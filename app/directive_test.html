@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/myAngularCss.css">
 </head>
-<body ng-cloak class="ng-cloak"><!--ng-clock用来避免启动闪烁 -->
+<body ng-cloak><!--ng-clock用来避免启动闪烁 -->
+    <label for="helloDirectiveUserName">请输入为HelloDirective演示用的用户名</label>
+    <input id="helloDirectiveUserName" ng-init="userNameForHelloDirective='蒋建清'" ng-model="userNameForHelloDirective" type="text" placeholder="请输入用户名">
     <span>自定义指令simpleHelloDirective测试
-        <simple-hello user-name="jjq" new-address="江苏常州" email="cz_jjq@qq.com"></simple-hello>
+        <simple-hello user-name="userNameForHelloDirective" new-address="江苏常州" email="cz_jjq@qq.com"></simple-hello>
     </span>
     <div>
         <p>ng-show\ng-hide测试</p>
@@ -51,6 +53,6 @@
         </ul>
     </div>
 
-    <script data-main="js/main" src="node_modules/requirejs/require.js"></script>
+    <script data-main="js/main" src="../node_modules/requirejs/require.js"></script>
 </body>
 </html>
