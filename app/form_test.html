@@ -2,34 +2,37 @@
 <html lang="en" data-framework="angularjs">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
     <title>表单测试--Angular</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/myAngularCss.css">
 </head>
-<body ng-cloak><!--ng-clock用来避免启动闪烁 -->
+<body ng-cloak class="container"><!--ng-clock用来避免启动闪烁 -->
     <h4>**注意：所有的表单元素都必须有name属性**</h4>
 
     <form name="signup_form" novalidate ng-submit="">
+
         <fieldset>
             <legend>表单测试</legend>
-
-            <!-- 表单验证必须有name属性  -->
-            <input name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="Please input email address" required>
-            <div ng-show="signup_form.emailAddr.$dirty && signup_form.emailAddr.$invalid">
-                <small class="error" ng-show="signup_form.emailAddr.$error.email">
+            <div class="form-group" ng-class="{'has-error':signup_form.emailAddr.$dirty && signup_form.emailAddr.$invalid}">
+                <label for="emailAddr1" class="control-label">邮件地址</label>
+                <input id="emailAddr1" name="emailAddr" ng-model="emailAddress" class="form-control" type="email" placeholder="Please input email address" required>
+                <span class="help-block" ng-if="signup_form.emailAddr.$error.email">
                     邮件地址无效！
-                </small>
-                <small class="error" ng-show="signup_form.emailAddr.$error.required">
+                </span>
+                <span class="help-block" ng-if="signup_form.emailAddr.$error.required">
                     邮件地址必须要输入！
-                </small>
+                </span>
+                <span class="help-block" ng-if="signup_form.emailAddr.$valid">邮件地址有效：{{emailAddress}}</span>
             </div>
-            <div ng-show="signup_form.emailAddr.$valid">
-                <p>邮件地址有效：{{emailAddress}}</p>
-            </div>
+            <!-- 表单验证必须有name属性  -->
 
         </fieldset>
-        <button type="submit" ng-disabled="signup_form.$invalid">提交</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="signup_form.$invalid">提交</button>
         <!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
     </form>
 
@@ -57,6 +60,6 @@
         <!--<span ng-bind="name">另一种数据绑定方法，可用于防止闪烁,但与ng-controller好像存在冲突 -->
     </form>
 
-    <script data-main="js/main" src="../node_modules/requirejs/require.js"></script>
+    <script data-main="require-config" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>

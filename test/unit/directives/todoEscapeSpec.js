@@ -1,5 +1,5 @@
 define([
-	'directives/todoEscape',
+	'../../../app/directives/todoEscape',
 	'jquery',
 	'angular-mocks'
 ], function (todoEscapeDir, jQuery) {

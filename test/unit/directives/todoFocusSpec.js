@@ -1,5 +1,5 @@
 define([
-	'directives/todoFocus',
+	'../../../app/directives/todoFocus',
 	'angular-mocks'
 ], function (todoFocusDir) {
 	'use strict';
