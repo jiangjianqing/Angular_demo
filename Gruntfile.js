@@ -15,16 +15,6 @@ module.exports=function(grunt){
 		//获取package.json的信息
 		pkg:grunt.file.readJSON('package.json'),
 		
-		requirejs: {
-		    compile: {
-		        options: {
-		            name: "require-config",
-		            baseUrl: "app/",
-		            mainConfigFile: "app/require-config.js",
-		            out: "dist/app/require-config.js"
-		        }
-		    }
-		},
 		//jshint语法检查配置
 		jshint:{
 			build:['Gruntfile.js','<%= yeoman.app %>/*.js'],
@@ -39,7 +29,7 @@ module.exports=function(grunt){
 		                "layout": "byComponent",
 		                "install": true,
 		                "verbose": false,
-		                "cleanTargetDir": false
+		                "cleanTargetDir": true
 		              }
 		          }
 	    },
@@ -69,7 +59,7 @@ module.exports=function(grunt){
 	            '*.{ico,png,txt}',
 	            '.htaccess',
 	            '*.js',
-	            '*.html',
+	            //'*.html',
 	            'images/{,*/}*.{webp}',
 	            'styles/fonts/{,*/}*.*'
 	          ]
@@ -83,6 +73,11 @@ module.exports=function(grunt){
 	          cwd: 'bower_components/bootstrap/dist',
 	          src: 'fonts/*',
 	          dest: '<%= yeoman.dist %>'
+	        },{
+	          expand: true,
+	          cwd: 'bower_components/bootstrap/dist/css',
+	          src: '*.min.css',
+	          dest: '<%= yeoman.dist %>/styles'
 	        }]
 	      },
 	      styles: {
@@ -109,18 +104,7 @@ module.exports=function(grunt){
 		        src: 'app/index.html',
 		        dest: 'dist/index.html'
 		    }
-		},		
-		usemin: {
-		  js: 'dist/require-config.js',
-		  options: {
-		    assetsDirs: 'images',
-		    patterns: {
-		      js: [
-		        [/(image\.png)/, 'Replacing reference to image.png']
-		      ]
-		    }
-		  }
-		},
+		},				
 		replace: {
 	      dist: {
 	        options: {
