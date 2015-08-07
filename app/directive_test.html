@@ -2,14 +2,26 @@
 <html lang="en" data-framework="angularjs">
 <head>
     <meta charset="utf-8">
+    <!--
+    <base href="app"> 打开Html5模式的时候需要使用 或者 在 $locationProvider.html5Mode 中设置requireBase: false-->
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <title>指令测试</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <title>指令测试--Angular</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="css/myAngularCss.css">
+
+    <!--(if target dist)>
+        <link rel="stylesheet" href="styles/bootstrap.min.css" />
+    <!(endif)-->
+    <!--(if target dummy)><!-->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!--<!(endif)-->
+    <title>My AngularJS App</title>
+    <!--
+    <link rel="stylesheet" href="app.css">
+    -->
+    <link rel="stylesheet" href="styles/myAngularCss.css">
 </head>
 <body ng-cloak><!--ng-clock用来避免启动闪烁 -->
     <label for="helloDirectiveUserName">请输入为HelloDirective演示用的用户名</label>
@@ -57,6 +69,17 @@
         </ul>
     </div>
 
-    <script data-main="require-config" src="bower_components/requirejs/require.js"></script>
+<!--(if target dist)>
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="lib/bootstrap/bootstrap.js"></script>
+
+    <script data-main="require-config" src="lib/requirejs/require.js"></script>
+<!(endif)-->
+<!--(if target dummy)><!-->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script data-main="require-config" src="../bower_components/requirejs/require.js"></script>
+<!--<!(endif)-->
 </body>
 </html>

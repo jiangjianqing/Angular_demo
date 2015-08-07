@@ -18,11 +18,11 @@ if(window.__karma__) {
 
 require.config({
 	paths: {
-		angular: 'bower_components/angular/angular',
-		angularRoute: 'bower_components/angular-route/angular-route',
-		angularMocks: 'bower_components/angular-mocks/angular-mocks',
-        angularMessages: 'bower_components/angular-messages/angular-messages',
-		text: 'bower_components/requirejs-text/text'
+		angular: '../bower_components/angular/angular',
+		angularRoute: '../bower_components/angular-route/angular-route',
+		angularMocks: '../bower_components/angular-mocks/angular-mocks',
+        angularMessages: '../bower_components/angular-messages/angular-messages',
+		text: '../bower_components/requirejs-text/text'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},

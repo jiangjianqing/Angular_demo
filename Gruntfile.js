@@ -110,7 +110,7 @@ module.exports=function(grunt){
 	        options: {
 	          patterns: [
 	            {
-	              match: /bower_components/g,
+	              match: /\.\.\/bower_components/g,
 	              replacement: 'lib'
 	            }
 	          ]
