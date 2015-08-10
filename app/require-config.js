@@ -22,12 +22,18 @@ require.config({
 		angularRoute: '../bower_components/angular-route/angular-route',
 		angularMocks: '../bower_components/angular-mocks/angular-mocks',
         angularMessages: '../bower_components/angular-messages/angular-messages',
+        angularTranslate:'../bower_components/angular-translate/angular-translate',
+        angularSanitize:'../bower_components/angular-sanitize/angular-sanitize',
+        angularTranslateLoaderStaticFiles:'../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files',
 		text: '../bower_components/requirejs-text/text'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
 		'angularRoute': ['angular'],
         'angularMessages':['angular'],
+        'angularSanitize':['angular'],
+        'angularTranslate':['angularSanitize'],
+        'angularTranslateLoaderStaticFiles':['angularTranslate'],
 		'angularMocks': {
 			deps:['angular'],
 			'exports':'angular.mock'

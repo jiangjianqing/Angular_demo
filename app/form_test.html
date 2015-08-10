@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-framework="angularjs">
+<html lang="zh-CN" data-framework="angularjs">
 <head>
     <meta charset="utf-8">
     <!--
@@ -25,6 +25,24 @@
 </head>
 <body ng-cloak class="container"><!--ng-clock用来避免启动闪烁 -->
     <h4>**注意：所有的表单元素都必须有name属性**</h4>
+    <div ng-controller="TranslateController">
+        <select class="language-switching"  ng-model="cur_lang"        ng-change="changeLanguage(cur_lang)">
+            <option value="en">English</option>
+            <option value="de">German</option>
+            <option value="cn">中文</option>
+        </select>
+        <button ng-click="changeLanguage('de')" translate="BUTTON_TEXT_DE"></button>
+        <button ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>
+    </div>
+<!--
+国际化条件选择范例
+<span>{{ (gender?'common.male':'common.female') | translate}}</span>
+<p translate="PARAGRAPH" translate-values="{username: '<span style=\'color:red;\'>HACKED</span>'}"></p>
+注意：千万不要使用 过滤器 的方式，对中文支持存在问题，例如
+<p>{{"BUTTON_TEXT_DE" | translate}}</p>
+-->
+    <h2 translate>{{"HEADLINE"}}</h2>
+    <p translate>{{"HINT_TEXT"}}</p>
 
     <form name="signup_form" novalidate ng-submit="">
 
