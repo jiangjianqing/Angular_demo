@@ -24,6 +24,7 @@ require.config({
         angularMessages: '../bower_components/angular-messages/angular-messages',
         angularTranslate:'../bower_components/angular-translate/angular-translate',
         angularSanitize:'../bower_components/angular-sanitize/angular-sanitize',
+		angularUiRouter:'../bower_components/angular-ui-router/angular-ui-router',
         angularTranslateLoaderStaticFiles:'../bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files',
 		text: '../bower_components/requirejs-text/text'
 	},
@@ -32,6 +33,7 @@ require.config({
 		'angularRoute': ['angular'],
         'angularMessages':['angular'],
         'angularSanitize':['angular'],
+		'angularUiRouter':['angular'],
         'angularTranslate':['angularSanitize'],
         'angularTranslateLoaderStaticFiles':['angularTranslate'],
 		'angularMocks': {

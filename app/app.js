@@ -6,6 +6,7 @@ define(['angular'
         ,'angularTranslate'
         ,'angularSanitize'
         ,'angularTranslateLoaderStaticFiles'
+        ,'angularUiRouter'
     //以下为自定义
         ,'scripts/controllers/translate'
         ,'scripts/controllers/todo'
@@ -22,7 +23,9 @@ define(['angular'
         ,'scripts/services/myInterpolate'
         ,'scripts/services/translate'
         ,'scripts/filters/capitalize'
-], function(angular, angularRoute,angularMessages,angularTranslate,angularSanitize,angularTranslateLoaderStaticFiles
+], function(angular, angularRoute,angularMessages,angularTranslate,angularSanitize
+        ,angularTranslateLoaderStaticFiles
+        ,angularUiRouter
             //以下为自定义
         ,translateCtrl
         ,todoCtrl
@@ -46,6 +49,7 @@ define(['angular'
             ,'ngMessages'
             ,'ngSanitize'
             ,'pascalprecht.translate'
+            ,'ui.router'
             //以下为自定义
             ,helloDir,nprLinkDir,ensureUniqueDir,capitalizeFilter,phoneStorageSrv,myInterpolateSrv,translateSrv
             ])
@@ -97,14 +101,26 @@ define(['angular'
                     //针对Html5的history模式，设置html5Mode(true)即可
                     //如果当是以hash方式更新location的话，需要设置下hashPrefix，默认为空
                     $locationProvider.html5Mode({
-                        enabled: true,
+                        enabled: false, //使用html5Mode对路由的设置有影响，千万注意
                         requireBase: false //用这个可以避免在Html中写<base href="app"> 这一句
                         //<base href="app"> 打开Html5模式的时候需要使用 或者 在 $locationProvider.html5Mode 中设置requireBase: false-->
                     }).hashPrefix('!');
 
                     //$routeProvider.otherwise({redirectTo: '/view1'});
                 }
-            ]);
+            ])
+            .config(function($stateProvider,$urlRouterProvider) {
+                $urlRouterProvider.when("", "/start");
+                $stateProvider
+                    .state('start', {
+                        url: "/start",
+                        templateUrl: 'views/partials/start.html'
+                    })
+                    .state('report', {
+                        url: '/report',
+                        templateUrl: 'views/partials/report.html'
+                    });
+            });
     }
 );
 
