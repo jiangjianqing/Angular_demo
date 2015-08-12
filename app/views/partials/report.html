@@ -1,1 +1,16 @@
-<h3>这里是报表内容</h3>
+<h3 class="page-header">报表数据<small>（这里展示了路由嵌套）</small></h3>
+
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group">
+        <a class="btn btn-default" ui-sref-active="active" ui-sref="report.current">当月报表</a>
+        <a class="btn btn-default" ui-sref-active-eq="active" ui-sref="report.last">上月报表</a>
+        <a class="btn btn-default" ui-sref-active="active" ui-sref="report.resolvetest">resolve_test</a>
+    </div>
+
+    <div class="btn-group hidden">
+        <a class="btn btn-default" ui-sref-active="active" ui-sref="report.current">当月报表</a>
+        <a class="btn btn-default" ui-sref-active-eq="active" ui-sref="report.last">上月报表</a>
+    </div>
+</div>
+
+<div ui-view></div>

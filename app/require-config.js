@@ -19,7 +19,6 @@ if(window.__karma__) {
 require.config({
 	paths: {
 		angular: '../bower_components/angular/angular',
-		angularRoute: '../bower_components/angular-route/angular-route',
 		angularMocks: '../bower_components/angular-mocks/angular-mocks',
         angularMessages: '../bower_components/angular-messages/angular-messages',
         angularTranslate:'../bower_components/angular-translate/angular-translate',
@@ -30,7 +29,6 @@ require.config({
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
-		'angularRoute': ['angular'],
         'angularMessages':['angular'],
         'angularSanitize':['angular'],
 		'angularUiRouter':['angular'],
@@ -56,7 +54,8 @@ require([
 		var $html = angular.element(document.getElementsByTagName('html')[0]);
 		angular.element().ready(function() {
 			// bootstrap the app manually
-			angular.bootstrap(document, ['myApp']);
+			//angular.bootstrap(document, ['myApp']);
+            angular.bootstrap(document, [app]);
 		});
 	}
 );

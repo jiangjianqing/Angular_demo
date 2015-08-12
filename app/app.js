@@ -1,12 +1,14 @@
 'use strict';
 
 define(['angular'
-        ,'angularRoute'
-        ,'angularMessages'
+        ,'angularUiRouter'
         ,'angularTranslate'
         ,'angularSanitize'
         ,'angularTranslateLoaderStaticFiles'
-        ,'angularUiRouter'
+        ,'angularMessages'
+
+        //定义路由
+        ,'app-router'
     //以下为自定义
         ,'scripts/controllers/translate'
         ,'scripts/controllers/todo'
@@ -23,9 +25,11 @@ define(['angular'
         ,'scripts/services/myInterpolate'
         ,'scripts/services/translate'
         ,'scripts/filters/capitalize'
-], function(angular, angularRoute,angularMessages,angularTranslate,angularSanitize
+], function(angular, angularUiRouter,angularTranslate,angularSanitize
         ,angularTranslateLoaderStaticFiles
-        ,angularUiRouter
+        ,angularMessages
+        ,appRouter//自定义路由
+
             //以下为自定义
         ,translateCtrl
         ,todoCtrl
@@ -44,19 +48,21 @@ define(['angular'
         ,capitalizeFilter
     ) {
 	// Declare app level module which depends on views, and components
-        return angular.module('myApp', [
-            'ngRoute'
+        var appName='myApp';
+        var appModule=angular.module(appName, [
+            'ui.router'
             ,'ngMessages'
             ,'ngSanitize'
             ,'pascalprecht.translate'
-            ,'ui.router'
+
             //以下为自定义
             ,helloDir,nprLinkDir,ensureUniqueDir,capitalizeFilter,phoneStorageSrv,myInterpolateSrv,translateSrv
-            ])
-            .controller('TranslateController',translateCtrl)//翻译控制器
+            ]);
+        appModule.controller('TranslateController',translateCtrl)//翻译控制器
             .controller('PhoneListController', phoneCtrl)//控制器名称定义：####Controller
             .controller('ExprController',exprCtrl)
             .controller('PlayerController',audioCtrl)
+            //设置i18n参数
             .config(['$translateProvider',function($translateProvider){
                 //注意：使用angular-translate必须加载angular-sanitize
                 //详细见其官方手册关于安全注入html的说明,http://angular-translate.github.io/docs/#/guide/19_security
@@ -96,31 +102,22 @@ define(['angular'
                 $translateProvider.fallbackLanguage(langKey);
 
             }])
-            .config(['$routeProvider','$locationProvider',
-                function($routeProvider,$locationProvider){
-                    //针对Html5的history模式，设置html5Mode(true)即可
-                    //如果当是以hash方式更新location的话，需要设置下hashPrefix，默认为空
-                    $locationProvider.html5Mode({
-                        enabled: false, //使用html5Mode对路由的设置有影响，千万注意
-                        requireBase: false //用这个可以避免在Html中写<base href="app"> 这一句
-                        //<base href="app"> 打开Html5模式的时候需要使用 或者 在 $locationProvider.html5Mode 中设置requireBase: false-->
-                    }).hashPrefix('!');
+            //设置定位参数
+            .config(['$locationProvider',function($locationProvider){
+                //针对Html5的history模式，设置html5Mode(true)即可
+                //如果当是以hash方式更新location的话，需要设置下hashPrefix，默认为空
+                $locationProvider.html5Mode({
+                    enabled: false, //使用html5Mode对路由的设置有影响，千万注意
+                    requireBase: false //用这个可以避免在Html中写<base href="app"> 这一句
+                    //<base href="app"> 打开Html5模式的时候需要使用 或者 在 $locationProvider.html5Mode 中设置requireBase: false-->
+                }).hashPrefix('!');
 
                     //$routeProvider.otherwise({redirectTo: '/view1'});
-                }
-            ])
-            .config(function($stateProvider,$urlRouterProvider) {
-                $urlRouterProvider.when("", "/start");
-                $stateProvider
-                    .state('start', {
-                        url: "/start",
-                        templateUrl: 'views/partials/start.html'
-                    })
-                    .state('report', {
-                        url: '/report',
-                        templateUrl: 'views/partials/report.html'
-                    });
-            });
+            }])
+            //设置路由
+            .config(appRouter);
+
+        return appName;
     }
 );
 
