@@ -9,7 +9,9 @@ define([
         ,function($stateProvider,$urlRouterProvider) {
             //如果没有路由引擎能匹配当前的导航状态，那它就会默认将路径路由至 /start,
             // 这个页面就是状态名称被声明的地方. 只要理解了这个，那它就像switch case语句中的default选项.
-            $urlRouterProvider.when("", "/start");
+            $urlRouterProvider
+                //.when('/inputbox','/inputbox/detail')
+                .otherwise("/start");
             //$urlRouterProvider
             //    // 错误的路由重定向
             //    .when('/c?id', '/contacts/:id')
@@ -20,6 +22,37 @@ define([
                 .state('start', {
                     url: "/start",
                     templateUrl: 'views/partials/start.html'
+                })
+                .state('inputbox', {
+                    //abstract:true,
+                    url:"/inputbox"
+                    ,templateUrl:'views/partials/inputbox.html'
+                    ,controller:['$scope','$state',function($scope,$state/*,currentDetails, facebookId*/) {
+                        //这里比较重要，当激活inputbox状态时并不会将inputbox.detail的内容显示出来，所以用下面的代码重定向
+                        $state.transitionTo('inputbox.detail');
+                        //$state.go('inputbox.detail');
+                    }]
+                })
+                .state('inputbox.detail', {
+                    url:"/detail"
+                    ,views: {
+                        'filters': {
+                            template: '<h4>Filter inbox</h4>',
+                            controller: function($scope) {}
+                        },
+                        'mailbox': {
+                            templateUrl: 'views/inputbox/mailbox.html'
+
+                        },
+                        'priority@inputbox': {
+                            template: '<h4>Priority inbox</h4>'
+                            //resolve: {
+                            //    facebook: function() {
+                            //        return FB.messages();
+                            //    }
+                            //}
+                        }
+                    }
                 })
                 .state('report', {
                     url: '/report',
