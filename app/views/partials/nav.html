@@ -34,9 +34,21 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <!--
                 <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
+                -->
+                <div ng-controller="TranslateController">
+                    语言
+                    <select class="language-switching"  ng-model="cur_lang"        ng-change="changeLanguage(cur_lang)">
+                        <option value="en">English</option>
+                        <option value="de">German</option>
+                        <option value="cn">中文</option>
+                    </select>
+                    <!--
+                    <button ng-click="changeLanguage('de')" translate="BUTTON_TEXT_DE"></button>
+                    <button ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>
+                    -->
+                </div>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

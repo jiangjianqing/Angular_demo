@@ -2,5 +2,7 @@
   "HEADLINE":"中文头",
   "HINT_TEXT":"这里可以看到中文信息",
   "BUTTON_TEXT_EN":"英语",
-  "BUTTON_TEXT_DE":"德语"
+  "BUTTON_TEXT_DE":"德语",
+  "REPORT":"报表",
+  "OVERVIEW":"概要"
 }
