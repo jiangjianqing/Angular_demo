@@ -1,3 +1,4 @@
+/*20151228 deprecated ,本文件是集中式配置的样式，现在改为controller、service、directive等等都独立配置的方式，具体参考app.js和app-controllers.js**/
 'use strict';
 
 define(['angular'
@@ -9,13 +10,43 @@ define(['angular'
 
         //定义路由
         ,'app-router'
-        ,'app-controllers' //控制器配置文件
-        //这里可以将services、directives、filters都独立配置
+    //以下为自定义
+        ,'scripts/controllers/translate'
+        ,'scripts/controllers/todo'
+        ,'scripts/controllers/phone'
+        ,'scripts/controllers/audio'
+        ,'scripts/controllers/expr'
+        ,'scripts/directives/hello'
+        ,'scripts/directives/nprLink'
+        ,'scripts/directives/todoFocus'
+        ,'scripts/directives/todoEscape'
+        ,'scripts/directives/ensureUnique'
+        ,'scripts/services/todoStorage'
+        ,'scripts/services/phoneStorage'
+        ,'scripts/services/myInterpolate'
+        ,'scripts/services/translate'
+        ,'scripts/filters/capitalize'
 ], function(angular, angularUiRouter,angularTranslate,angularSanitize
         ,angularTranslateLoaderStaticFiles
         ,angularMessages
         ,appRouter//自定义路由
-        ,appControllers//controller配置文件
+
+            //以下为自定义
+        ,translateCtrl
+        ,todoCtrl
+        ,phoneCtrl
+        ,audioCtrl
+        ,exprCtrl
+        ,helloDir
+        ,nprLinkDir
+        ,todoFocusDir
+        ,todoEscapeDir
+        ,ensureUniqueDir
+        ,todoStorageSrv
+        ,phoneStorageSrv
+        ,myInterpolateSrv
+        ,translateSrv
+        ,capitalizeFilter
     ) {
 	// Declare app level module which depends on views, and components
         var appName='myApp';
@@ -25,10 +56,13 @@ define(['angular'
             ,'ngSanitize'
             ,'pascalprecht.translate'
 
-            ,appControllers //使用自定义的controllers配置
-
+            //以下为自定义
+            ,helloDir,nprLinkDir,ensureUniqueDir,capitalizeFilter,phoneStorageSrv,myInterpolateSrv,translateSrv
             ]);
-        appModule
+        appModule.controller('TranslateController',translateCtrl)//翻译控制器
+            .controller('PhoneListController', phoneCtrl)//控制器名称定义：####Controller
+            .controller('ExprController',exprCtrl)
+            .controller('PlayerController',audioCtrl)
             //设置i18n参数
             .config(['$translateProvider',function($translateProvider){
                 //注意：使用angular-translate必须加载angular-sanitize
